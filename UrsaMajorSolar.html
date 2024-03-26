@@ -3,36 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Chat Sample</title>
-    <!-- You may need to include any necessary CSS files here -->
+    <title>Live Chat</title>
+    <style type='text/css'>
+        .embeddedServiceHelpButton .helpButton .uiButton {
+            background-color: #3C99A5;
+            font-family: "Arial", sans-serif;
+        }
+        .embeddedServiceHelpButton .helpButton .uiButton:focus {
+            outline: 1px solid #3C99A5;
+        }
+    </style>
+    <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+    <script type='text/javascript'>
+        var initESW = function(gslbBaseURL) {
+            embedded_svc.settings.displayHelpButton = false; // Tidak menampilkan tombol bantuan secara default
+
+            embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+            embedded_svc.settings.entryFeature = 'LiveAgent';
+
+            embedded_svc.init(
+                'https://kingmurad-dev-ed.my.salesforce.com',
+                'https://kingmurad-dev-ed.my.site.com/YukTransfer',
+                gslbBaseURL,
+                '00D2v000002GydM',
+                'external_service',
+                {
+                    baseLiveAgentContentURL: 'https://c.la1-c1-it3.salesforceliveagent.com/content',
+                    deploymentId: '572GC000000UejT',
+                    buttonId: '573GC000000UgOW',
+                    baseLiveAgentURL: 'https://d.la1-c1-it3.salesforceliveagent.com/chat',
+                    eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04IGC000000Cs2I2AS_18e73ba7639',
+                    isOfflineSupportEnabled: false
+                }
+            );
+        };
+
+        function startChat() {
+            // Memulai chat saat tombol diklik
+            embedded_svc.startChat();
+        }
+
+        if (!window.embedded_svc) {
+            var s = document.createElement('script');
+            s.setAttribute('src', 'https://kingmurad-dev-ed.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+            s.onload = function() {
+                initESW(null);
+            };
+            document.body.appendChild(s);
+        } else {
+            initESW('https://service.force.com');
+        }
+    </script>
 </head>
 <body>
-    <!-- Your HTML content goes here -->
-
-    <!-- Example: Button to initiate chat -->
-    <button onclick="initEmbeddedMessaging()">Start Chat</button>
-
-    <!-- The JavaScript code -->
-    <script type='text/javascript'>
-        function initEmbeddedMessaging() {
-            try {
-                embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
-                
-                embeddedservice_bootstrap.init(
-                    '00D2v000002GydM',
-                    'ursa_major_solar',
-                    'https://kingmurad-dev-ed.my.site.com/ESWursamajorsolar1711423209816',
-                    {
-                        scrt2URL: 'https://kingmurad-dev-ed.my.salesforce-scrt.com'
-                    }
-                );
-            } catch (err) {
-                console.error('Error loading Embedded Messaging: ', err);
-            }
-        };
-    </script>
-
-    <!-- Load Bootstrap JS -->
-    <script type='text/javascript' src='https://kingmurad-dev-ed.my.site.com/ESWursamajorsolar1711423209816/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+    <!-- Tombol untuk memulai chat -->
+    <button onclick="startChat()">Start Chat</button>
 </body>
 </html>
