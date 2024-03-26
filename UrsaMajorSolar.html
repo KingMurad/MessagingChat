@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Chat Sample</title>
+    <!-- You may need to include any necessary CSS files here -->
+</head>
+<body>
+    <!-- Your HTML content goes here -->
+
+    <!-- Example: Button to initiate chat -->
+    <button onclick="initEmbeddedMessaging()">Start Chat</button>
+
+    <!-- The JavaScript code -->
+    <script type='text/javascript'>
+        function initEmbeddedMessaging() {
+            try {
+                embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+                
+                embeddedservice_bootstrap.init(
+                    '00D2v000002GydM',
+                    'ursa_major_solar',
+                    'https://kingmurad-dev-ed.my.site.com/ESWursamajorsolar1711423209816',
+                    {
+                        scrt2URL: 'https://kingmurad-dev-ed.my.salesforce-scrt.com'
+                    }
+                );
+            } catch (err) {
+                console.error('Error loading Embedded Messaging: ', err);
+            }
+        };
+    </script>
+
+    <!-- Load Bootstrap JS -->
+    <script type='text/javascript' src='https://kingmurad-dev-ed.my.site.com/ESWursamajorsolar1711423209816/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+</body>
+</html>
